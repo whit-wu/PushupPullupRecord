@@ -1,6 +1,7 @@
 import os
 import csv
 import time
+from WriteData import WriteData
 
 class Workouts(object):
 
@@ -9,8 +10,19 @@ class Workouts(object):
     # Has user perform Day 1 workouts
     def DayOneWorkouts(self):
 
-        pushupreps = []
-        chinupreps = []
+
+        workOut1Message = "Feet Elevated Pushup" + "\nSets: 5 Reps: As many as possible" \
+                          + "\nPlace your feet on a bench or other elevated surface and get into " \
+                          + "\npushup position with your hands shoulder-width apart. Brace your core " \
+                          + "\nand lower your body until your chest is just above the floor."
+
+        workOut2Message = "Feet Elevated Pushup" \
+                          + "\nSets: 5 Reps: As many as possible" \
+                          + "\nPlace your feet on a bench or other elevated surface and get into "\
+                          + "\npushup position with your hands shoulder-width apart. Brace your core " \
+                          + "\nand lower your body until your chest is just above the floor."
+
+        workoutDay = 1
 
         os.system('cls')
         print("Day One Workouts"
@@ -19,57 +31,59 @@ class Workouts(object):
               "\n   Chinup")
         print("Press Enter to begin workouts...")
         input()
+        dataToWrite = WriteData()
+        dataToWrite.CaptureWorkoutData(5, workOut1Message, workOut2Message, workoutDay)
 
-        # with open('Workouts.csv', 'w') as csvfile:
-        #     CurrentDateWriter = csv.writer(csvfile)
-        #     CurrentDateWriter.writerow(["Day One Workouts", time.strftime("%Y-%m-%d")])
-            # CurrentDateWriter.writerow(time.strftime("%H:%M:%S"))
-        #loop to keep track of sets that need to be performed by user
-        for i in range(5):
-            os.system('cls')
-            print("Feet Elevated Pushup"
-                "\nSets: 5 Reps: As many as possible"
-                "\nPlace your feet on a bench or other elevated surface and get into "
-                "\npushup position with your hands shoulder-width apart. Brace your core "
-                "\nand lower your body until your chest is just above the floor.")
-            print("Enter reps for set " + str(i + 1) + ":")
-            #firstWorkoutRep = input()
-            pushupreps.append(input())
 
-            os.system('cls')
-            print("Chinup"
-                  "\nSets: 5 Reps: As many as possible"
-                  "\nHang from a chinup bar with hands shoulder-width apart and palms"
-                  "\nfacing you. Pull yourself up until your chin is over the bar.")
-            print("Enter reps for set " + str(i + 1) + ":")
-            #secondWorkoutRep = input()
-            chinupreps.append(input())
-        with open('Workouts.csv', 'a', newline='') as csvfile:
-            WorkoutWriter = csv.writer(csvfile, delimiter=',')
-            #RepWriter = csv.writer(csvfile, delimiter=',')
-            WorkoutWriter.writerow(["Day One Workouts", time.strftime("%Y-%m-%d")])
-            WorkoutWriter.writerow(["Feet Elevated Pushup", "(5:AMRAP)", '', 'Chinup', '(5:AMRAP)'])
-            for i in range(len(pushupreps)):
-                WorkoutWriter.writerow(['Set ' + str(i+1), pushupreps[i], '', 'Set ' + str(i+1), chinupreps[i]])
-            WorkoutWriter.writerow('')
-            WorkoutWriter.writerow('')
+
 
 
     # Has user perform Day 2 workouts
     def DayTwoWorkouts(self):
         print("Day Two Workouts")
+        workout1Message = "Neutral Grip Chinup " \
+                          + "\nUse a chinup bar with parallel handles, or hook a V-grip bar over a" \
+                          + "\nstraight chinup bar. Hang from the bar and pull yourself up until your chin is over it." \
+                          + "\nHold for a second, then lower yourself halfway. Come back up, then lower yourself " \
+                          + "\nto a full hang again. That’s one full “1.5” rep."
+
+        workout2Message = "Close-Grip Pushup" \
+                          + "\nGet into pushup position and bring your hands inside shoulder width. " \
+                          + "\nKeep your core braced and perform a pushup."
+
+        workoutDay = 2
+
+        dataToWrite = WriteData()
+        dataToWrite.CaptureWorkoutData(4, workout1Message, workout2Message, workoutDay)
 
     # Has user perform Day 3 workouts
     def DayThreeWorkouts(self):
         print("Day Three Workouts")
+        workout1Message = "Pushup " + "\nPerform six pushups, then lower your body into the bottom position so your " \
+                          + "\nchest is just above the floor. Hold for six seconds, then perform five more pushups " \
+                          + "\nfollowed by a five-second hold in the bottom position. Continue counting down, "\
+                          + "\nalternating reps and static holds, until you reach one rep and a one-second hold."
+
+        workout2Message = "Sternum Chinup \nHang from the chinup bar with hands shoulder-width apart and palms facing" \
+                          + "\nyou. Lean back and pull yourself up, aiming to touch your lower chest to the bar."
+
+        workoutDay = 3
+        dataToWrite = WriteData()
+        dataToWrite.CaptureWorkoutData(3, workout1Message, workout2Message, workoutDay)
 
     # Has user perform Day 4 workouts
     def DayFourWorkouts(self):
         print("Day Four Workouts")
+        workout1Message = "Pullup" + "\nHang from the bar with hands outside shoulder width and palms facing away from" \
+                          + " you. Pull yourself up until your chin is over the bar."
+        workout2Message = "One-Leg Pushup" + "\nGet into pushup position and raise one leg behind you. Keep it "\
+                          + "\nelevated while you perform 10 pushups. Lower the leg, then raise the other one and "\
+                          + "perform another 10 pushup"
+        workoutDay = 4
 
-    # Has user perform Day 5 workouts
-    def DayFiveWorkouts(self):
-        print("Day Five Workouts")
+        dataToWrite = WriteData()
+        dataToWrite.CaptureWorkoutData(6, workout1Message, workout2Message, workoutDay)
+
 
     # Reads line on file to determine what day it is.
     # Day determines the workout user will do.
@@ -77,25 +91,25 @@ class Workouts(object):
         f = open('DayFile.txt', 'r')
         # print(f)
         contents = f.read()
-        print(contents[4])
-        if contents[4] == '1':
+        #print(contents[4])
+        if contents[0] == '1':
             #do the day 1 workouts
-            print("this works")
+            #print("this works")
             self.DayOneWorkouts()
-        elif contents[4] == '2':
+        elif contents[0] == '2':
             #do the day 2 workouts
-            print("this works")
+            #print("this works")
             self.DayTwoWorkouts()
-        elif contents[4] == '3':
+        elif contents[0] == '3':
             #do the day 3 workouts
-            print("this works")
+            #print("this works")
             self.DayThreeWorkouts()
-        elif contents[4] == '4':
+        elif contents[0] == '4':
             #do the day 4 workouts
-            print("this works")
+            #print("this works")
             self.DayFourWorkouts()
-        elif contents[4] == '5':
-            #do the day 5 workouts
-            print("this works")
-            self.DayFiveWorkouts()
+        else:
+            print("Value in DayFile.txt not recognized.  Please open the file and verify it is a value between 1 and 4")
+            return -1
+
 
