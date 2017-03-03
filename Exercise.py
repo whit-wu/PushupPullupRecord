@@ -16,11 +16,9 @@ class Workouts(object):
                           + "\npushup position with your hands shoulder-width apart. Brace your core " \
                           + "\nand lower your body until your chest is just above the floor."
 
-        workOut2Message = "Feet Elevated Pushup" \
-                          + "\nSets: 5 Reps: As many as possible" \
-                          + "\nPlace your feet on a bench or other elevated surface and get into "\
-                          + "\npushup position with your hands shoulder-width apart. Brace your core " \
-                          + "\nand lower your body until your chest is just above the floor."
+        workOut2Message = "Chinup" + "\nSets: 5 Reps: As many as possible"\
+                          + "\nHang from a chinup bar with hands shoulder-width apart and palms facing you. " + \
+                          "\nPull yourself up until your chin is over the bar."
 
         workoutDay = 1
 
