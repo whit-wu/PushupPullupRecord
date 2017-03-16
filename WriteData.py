@@ -8,7 +8,7 @@ class WriteData(object):
     nextDay = 0
 
     # code to record reps that will be written to csv file
-    def CaptureWorkoutData(self, setNum, workout1Message, workout2Message, workoutDay):
+    def CaptureWorkoutData(self, setNum, workout1Message, workout2Message, workoutDay, workout1, workout2, workout1Sets, workout2Sets):
         workout1Reps = []
         workout2Reps = []
         workoutDayToWrite = workoutDay
@@ -20,14 +20,14 @@ class WriteData(object):
             print(workout2Message)
             print("Enter reps for set " + str(i + 1) + ":")
             workout2Reps.append(input())
-        self.WriteToFile(workout1Reps, workout2Reps, workoutDayToWrite, setNum)
+        self.WriteToFile(workout1Reps, workout2Reps, workoutDayToWrite, setNum, workout1, workout2, workout1Sets, workout2Sets)
 
     # Code to write workout data to a csv file.  Also changes contents of DayFile.txt for next workout session.
-    def WriteToFile(self, workout1Stats, workout2Stats, workoutDayToWrite, setNum):
+    def WriteToFile(self, workout1Stats, workout2Stats, workoutDayToWrite, setNum, workout1, workout2, workout1Sets, workout2Sets):
         with open('Workouts.csv', 'a', newline='') as csvfile:
             WorkoutWriter = csv.writer(csvfile, delimiter=',')
             WorkoutWriter.writerow(["Day " + str(workoutDayToWrite) + " Workouts", time.strftime("%Y-%m-%d")])
-            WorkoutWriter.writerow(["Feet Elevated Pushup", "(5:AMRAP)", '', 'Chinup', '('+str(setNum)+':AMRAP)'])
+            WorkoutWriter.writerow([workout1, workout1Sets, '', workout2, workout2Sets])
             for i in range(setNum):
                 WorkoutWriter.writerow(['Set ' + str(i + 1), workout1Stats[i], '', 'Set ' + str(i + 1), workout2Stats[i]])
             WorkoutWriter.writerow('')
